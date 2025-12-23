@@ -1,0 +1,123 @@
+1. Find all the topics and tasks which are thought in the month of October
+
+Answer:-
+db.topics.find({ date: { $gte: ISODate("2020-10-01"), $lte: ISODate("2020-10-31") } });
+Output:
+{
+  _id: ObjectId('694a4b03790d4c81d46ce387'),
+  topic: 'MongoDB Basics',
+  date: 2020-10-20T00:00:00.000Z
+}
+
+{
+  _id: ObjectId('694a4b03790d4c81d46ce388'),
+  topic: 'Node.js Intro',
+  date: 2020-10-10T00:00:00.000Z
+}
+
+{
+  _id: ObjectId('694a4b03790d4c81d46ce389'),
+  topic: 'Aggregation Framework',
+  date: 2020-10-30T00:00:00.000Z
+}
+
+2.Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+
+Answer:-
+db.company_drives.find({ date: { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") } })
+
+Output:-{
+  _id: ObjectId('694a4b32790d4c81d46ce390'),
+  company: 'Amazon',
+  date: 2020-10-25T00:00:00.000Z,
+  students_attended: [
+    ObjectId('64f000000000000000000001'),
+    ObjectId('64f000000000000000000003')
+  ]
+}
+
+3.Find all the company drives and students who are appeared for the placement.
+
+Answer:-
+db.company_drives.find({}, { company: 1, students_attended: 1, _id: 0 })
+
+Output:-
+{
+  company: 'Amazon',
+  students_attended: [
+    ObjectId('64f000000000000000000001'),
+    ObjectId('64f000000000000000000003')
+  ]
+}
+
+{
+  company: 'Google',
+  students_attended: [
+    ObjectId('64f000000000000000000002')
+  ]
+}
+
+4.Find the number of problems solved by the user in codekata
+
+Answer:-
+db.codekata.find({ user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f6") }, { problems_solved: 1, _id: 0 })
+
+Output:-
+{
+  problems_solved: 120
+}
+
+5.Find all the mentors with who has the mentee's count more than 15
+
+Answer:-
+db.mentors.find({ mentee_count: { $gt: 15 } })
+
+Output:-
+  _id: ObjectId('694a4b18790d4c81d46ce38c'),
+  name: 'Suresh',
+  mentee_count: 20
+}
+
+6.Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
+
+Answer:-
+db.attendance.aggregate([
+db.attendance.find({ 
+  date: { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") }, 
+  status: "Absent" 
+})
+
+db.topics.find({ 
+  date: { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") }, 
+  submitted: false 
+})
+
+Ouput:-
+{
+  _id: ObjectId('694a4b5f790d4c81d46ce397'),
+  user_id: ObjectId('64f000000000000000000001'),
+  date: 2020-10-16T00:00:00.000Z,
+  status: 'Absent'
+}
+{
+  _id: ObjectId('694a4b5f790d4c81d46ce399'),
+  user_id: ObjectId('64f000000000000000000003'),
+  date: 2020-10-25T00:00:00.000Z,
+  status: 'Absent'
+}
+{
+  _id: ObjectId('694a5d4a790d4c81d46ce419'),
+  task_name: 'Node.js Assignment',
+  date: 2020-10-18T00:00:00.000Z,
+  submitted: false,
+  user_id: ObjectId('6768a1f3e4b0f1a2c3d4e5f7')
+}
+{
+  _id: ObjectId('694a5d4a790d4c81d46ce41a'),
+  task_name: 'Aggregation Task',
+  date: 2020-10-28T00:00:00.000Z,
+  submitted: false,
+  user_id: ObjectId('6768a1f3e4b0f1a2c3d4e5f8')
+}
+
+

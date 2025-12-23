@@ -1,0 +1,62 @@
+
+use zenclass
+
+db.users.insertMany([
+  { name: "Arun", email: "arun@example.com", batch: "B45" },
+  { name: "Beena", email: "beena@example.com", batch: "B45" },
+  { name: "Charan", email: "charan@example.com", batch: "B46" }
+])
+
+db.codekata.insertMany([
+  { user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f6"), problems_solved: 120 },
+  { user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f7"), problems_solved: 80 },
+  { user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f8), problems_solved: 150 }
+])
+
+db.attendance.insertMany([
+  { user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f6"), date: ISODate("2020-10-16"), status: "Absent" },
+  { user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f7"), date: ISODate("2020-10-20"), status: "Present" },
+  { user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f8"), date: ISODate("2020-10-25"), status: "Absent" }
+])
+
+db.tasks.insertMany([
+  { task_name: "MongoDB Assignment", date: ISODate("2020-10-20"), submitted: true, user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f6") },
+  { task_name: "Node.js Assignment", date: ISODate("2020-10-18"), submitted: false, user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f7") },
+  { task_name: "Aggregation Task", date: ISODate("2020-10-28"), submitted: false, user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f8") }
+])
+
+db.company_drives.insertMany([
+  { company: "Amazon", date: ISODate("2020-10-25"), students_attended: [
+    ObjectId("6768a1f3e4b0f1a2c3d4e5f6"),
+    ObjectId("6768a1f3e4b0f1a2c3d4e5f8")
+  ] },
+  { company: "Google", date: ISODate("2020-10-14"), students_attended: [
+    ObjectId("6768a1f3e4b0f1a2c3d4e5f7")
+  ] }
+])
+
+db.tasks.insertMany([
+  {
+    task_name: "MongoDB Assignment",
+    date: ISODate("2020-10-20"),
+    submitted: true,
+    user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f6") // Arun
+  },
+  {
+    task_name: "Node.js Assignment",
+    date: ISODate("2020-10-18"),
+    submitted: false,
+    user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f7") // Beena
+  },
+  {
+    task_name: "Aggregation Task",
+    date: ISODate("2020-10-28"),
+    submitted: false,
+    user_id: ObjectId("6768a1f3e4b0f1a2c3d4e5f8") // Charan
+  }
+]);
+
+
+
+
+
